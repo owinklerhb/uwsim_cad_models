@@ -1,0 +1,801 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE rdf:RDF [ 
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+  <!ENTITY knowrob "http://knowrob.org/kb/knowrob.owl#" >
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+<rdf:RDF xmlns="http://knowrob.org/kb/IAI-alpine.owl#"
+  xml:base="http://knowrob.org/kb/IAI-alpine.owl#"
+  xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+  <!--owl:Ontology rdf:about="http://knowrob.org/kb/IAI-alpine.owl">
+    <owl:imports rdf:resource="package://env_mission/owl/iai-knowledge.owl"/>
+  </owl:Ontology-->
+
+  <owl:Class rdf:about="http://knowrob.org/kb/knowrob.owl#Transformation"/>
+ <owl:DatatypeProperty rdf:about="http://knowrob.org/kb/knowrob.owl#quaternion"/>
+ <owl:DatatypeProperty rdf:about="http://knowrob.org/kb/knowrob.owl#translation"/>
+
+    <!-- GENERAL DEFS -->
+    <owl:ObjectProperty rdf:about="http://knowrob.org/kb/knowrob.owl#describedInMap"/>
+  <owl:ObjectProperty rdf:about="http://knowrob.org/kb/knowrob.owl#isLiving"/>
+ <owl:ObjectProperty rdf:about="http://knowrob.org/kb/knowrob.owl#isAlive"/>
+ <owl:ObjectProperty rdf:about="http://knowrob.org/kb/knowrob.owl#hasColor"/>
+<owl:ObjectProperty rdf:about="http://knowrob.org/kb/knowrob.owl#hasState"/>
+    <owl:DatatypeProperty rdf:about="http://knowrob.org/kb/knowrob.owl#depthOfObject"/>
+    <owl:DatatypeProperty rdf:about="http://knowrob.org/kb/knowrob.owl#heightOfObject"/>
+    <owl:DatatypeProperty rdf:about="http://knowrob.org/kb/knowrob.owl#widthOfObject"/>
+    <owl:DatatypeProperty rdf:about="http://knowrob.org/kb/knowrob.owl#vectorX"/>
+    <owl:DatatypeProperty rdf:about="http://knowrob.org/kb/knowrob.owl#vectorY"/>
+    <owl:DatatypeProperty rdf:about="http://knowrob.org/kb/knowrob.owl#vectorZ"/>
+
+    <owl:Class rdf:about="http://knowrob.org/kb/knowrob.owl#SemanticEnvironmentMap"/>
+    <owl:Class rdf:about="http://knowrob.org/kb/knowrob.owl#SemanticMapPerception"/>
+    <owl:Class rdf:about="http://knowrob.org/kb/knowrob.owl#TimePoint"/>
+    <owl:Class rdf:about="http://knowrob.org/kb/knowrob.owl#Vector"/>
+    <owl:DatatypeProperty rdf:about="&knowrob;pathToCadModel"/>
+
+
+<owl:Class rdf:about="&knowrob;Crab"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;Animal"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;Plant"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;SpatialThing-Localized"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;Animal"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;SpatialThing-Localized"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;Starfish"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;Animal"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;NonLiving"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;SpatialThing-Localized"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;BlueRock"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;Nonliving"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;YellowRock"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;NonLiving"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;Anchor"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;NonLiving"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;Walkway"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;NonLiving"/> 
+</owl:Class>
+
+<owl:Class rdf:about="&knowrob;Manatee"> 
+  <rdfs:subClassOf rdf:resource="&knowrob;Animal"/> 
+</owl:Class>
+
+
+<!-- Green Island specific environment class defs -->
+
+  <owl:Class rdf:about="&knowrob;Seagrass11">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass11.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass12">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass12.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass13">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass13.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass14">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass14.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass21">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass21.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass22">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass22.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass23">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass23.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass24">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass24.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass31">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass31.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass32">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://uwsim/plant/seagrass32.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass33">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass33.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass34">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass34.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass41">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass41.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass42">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass42.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass43">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass43.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Seagrass44">
+	<rdfs:subClassOf rdf:resource="&knowrob;Plant"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/seagrass44.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Crab">
+	<rdfs:subClassOf rdf:resource="&knowrob;Animal"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/crab.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;YellowRock">
+	<rdfs:subClassOf rdf:resource="&knowrob;NonLiving"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/yellow_rock.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;BlueRock">
+	<rdfs:subClassOf rdf:resource="&knowrob;NonLiving"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/blue_rock.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+
+  <owl:Class rdf:about="&knowrob;Starfish">
+	<rdfs:subClassOf rdf:resource="&knowrob;Animal"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/starfish.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+
+  <owl:Class rdf:about="&knowrob;Manatee">
+	<rdfs:subClassOf rdf:resource="&knowrob;Animal"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/manatee.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+  <owl:Class rdf:about="&knowrob;Anchor">
+	<rdfs:subClassOf rdf:resource="&knowrob;NonLiving"/> 
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;pathToCadModel"/>
+                <owl:hasValue rdf:datatype="&xsd;string">package://UWSIM/objects/anchor.dae</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>  
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;heightOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;depthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+	<rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&knowrob;widthOfObject"/>
+                <owl:hasValue rdf:datatype="&xsd;double">1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>   
+  </owl:Class>
+
+
+
+
+
+  <owl:NamedIndividual rdf:about="http://knowrob.org/kb/uwsim_map.owl#GreenIsland">
+        <rdf:type rdf:resource="&knowrob;SemanticEnvironmentMap"/>
+    </owl:NamedIndividual>  
+<!-- ALL THE CLASS DEFINITIONS ENDING -->
+
+
+<!-- ######################################################################### -->
+<!-- List of non environmental things -->
+<!-- ######################################################################### -->
+<!-- Manatee01 (Scene 4.2)
+
+<owl:NamedIndividual rdf:about="&knowrob;manatee01">
+    <rdf:type rdf:resource="http://knowrob.org/kb/knowrob.owl#Manatee"/>
+    <knowrob:describedInMap rdf:resource="http://knowrob.org/kb/uwsim_map.owl#GreenIsland"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="&knowrob;Transformation_Manatee">
+    <rdf:type rdf:resource="&knowrob;Transformation"/>
+    <knowrob:quaternion rdf:datatype="&xsd;string">1.0 0.0 0.0 0.0</knowrob:quaternion>
+    <knowrob:translation rdf:datatype="&xsd;string">-3.186 1.667 0.274</knowrob:translation>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="&knowrob;SemanticMapPerceptionManatee">
+    <rdf:type rdf:resource="&knowrob;SemanticMapPerception"/>
+    <knowrob:startTime rdf:resource="http://knowrob.org/kb/uwsim_map.owl#timepoint_0"/>
+    <knowrob:eventOccursAt rdf:resource="&knowrob;Transformation_Manatee"/>
+    <knowrob:objectActedOn rdf:resource="&knowrob;Manatee"/>
+</owl:NamedIndividual-->
+
+
+<!-- ######################################################################### -->
+<!-- List of environmental plats -->
+<!-- ######################################################################### -->
+<!-- Seagrass Scene 1.1 -->
+
+<owl:NamedIndividual rdf:about="&knowrob;seagrass11">
+    <rdf:type rdf:resource="http://knowrob.org/kb/knowrob.owl#Seagrass11"/>
+    <knowrob:describedInMap rdf:resource="http://knowrob.org/kb/uwsim_map.owl#GreenIsland"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="&knowrob;Transformation_Seagrass11">
+    <rdf:type rdf:resource="&knowrob;Transformation"/>
+    <knowrob:quaternion rdf:datatype="&xsd;string">1.0 0.0 0.0 0.0</knowrob:quaternion>
+    <knowrob:translation rdf:datatype="&xsd;string">0 0 0</knowrob:translation>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="&knowrob;SemanticMapPerceptionSeagrass11">
+    <rdf:type rdf:resource="&knowrob;SemanticMapPerception"/>
+    <knowrob:startTime rdf:resource="http://knowrob.org/kb/uwsim_map.owl#timepoint_0"/>
+    <knowrob:eventOccursAt rdf:resource="&knowrob;Transformation_Seagrass11"/>
+    <knowrob:objectActedOn rdf:resource="&knowrob;Seagrass11"/>
+</owl:NamedIndividual>
+
+
+
+
+</rdf:RDF>
+
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.1592) http://owlapi.sourceforge.net -->     
+
+
+
